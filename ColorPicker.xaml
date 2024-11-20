@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="ColorPickerControl.ColorPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ColorPickerControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style TargetType="Slider">
+            <Setter Property="IsSelectionRangeEnabled" Value="True"/>
+            <Setter Property="SelectionStart" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Minimum}"/>
+            <Setter Property="SelectionEnd" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Maximum}"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.75*"/>
+            <ColumnDefinition Width="0.25*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Slider Grid.Row="0" Minimum="0" Maximum="255" VerticalAlignment="Center"
+                Value="{Binding Path=Red, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+            <Slider.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red" />
+            </Slider.Resources>
+        </Slider>
+
+        <Slider Grid.Row="1" Minimum="0" Maximum="255" VerticalAlignment="Center"
+                Value="{Binding Path=Green, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+            <Slider.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Green" />
+            </Slider.Resources>
+        </Slider>
+
+        <Slider Grid.Row="2" Minimum="0" Maximum="255" VerticalAlignment="Center"
+                Value="{Binding Path=Blue, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}">
+            <Slider.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Blue" />
+            </Slider.Resources>
+        </Slider>
+
+        <Rectangle Grid.Column="1" Grid.RowSpan="3" Margin="5" Stroke="Black" StrokeThickness="2">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="{Binding Path=Color, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"/>
+            </Rectangle.Fill>
+        </Rectangle>
+    </Grid>
+</UserControl>
